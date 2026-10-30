@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    ports:
+      - "127.0.0.1:8086:8000"
+    environment:
+      SECRET_KEY: ${SECRET_KEY:?Set SECRET_KEY in .env}
+      DATABASE_URL: sqlite:////data/careflow.db
+      COOKIE_SECURE: "0"
+    volumes:
+      - careflow_data:/data
+    restart: unless-stopped
+volumes:
+  careflow_data:
