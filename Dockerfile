@@ -1,7 +1,7 @@
-FROM python:3.12-slim
+FROM python:3.12-alpine
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /app
-RUN groupadd --gid 10001 careflow && useradd --uid 10001 --gid 10001 --home /app --no-create-home careflow
+RUN addgroup -g 10001 -S careflow && adduser -u 10001 -S -D -H -G careflow careflow
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 COPY app.py manage.py ./
