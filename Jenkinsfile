@@ -10,7 +10,7 @@ pipeline {
       steps { sh '''
         python3 -m venv .venv
         .venv/bin/pip install -r requirements-dev.txt
-        .venv/bin/pytest -q
+        PYTHONPATH=. .venv/bin/python -m pytest -q
       ''' }
     }
     stage('Bandit SAST') {
